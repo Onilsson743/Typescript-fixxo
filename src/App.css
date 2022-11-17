@@ -2,7 +2,6 @@
 #root {
   font-family: "Poppins", sans-serif;
   max-width: 100vw;
-  min-height: 100vh;
 }
 
 ._containersmall {
@@ -998,9 +997,6 @@ a:hover {
 
 .footer {
   background-color: #f8f8f8;
-  position: -webkit-sticky;
-  position: sticky;
-  bottom: 0;
   height: 110px;
   display: flex;
   justify-content: center;

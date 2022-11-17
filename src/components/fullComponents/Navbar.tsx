@@ -23,10 +23,10 @@ const Navbar: React.FC = () => {
         </section>
 
         <section className='navbar-icons'>
-          <IconLinks link = "/serch"  icon = "fa-regular fa-magnifying-glass" />
+          <IconLinks hideMobile = {false} link = "/serch"  icon = "fa-regular fa-magnifying-glass" />
           <IconLinks hideMobile = {true} link = "/serch" icon = "fa-regular fa-arrows-repeat" />
           <IconLinks hideMobile = {true} link = "/serch" icon = "fa-regular fa-heart" number={10} />
-          <IconLinks icon = "fa-regular fa-bag-shopping" />
+          <IconLinks hideMobile = {false} icon = "fa-regular fa-bag-shopping" />
           
           <button className={`mobile-menu ${showMenu ? "mobile-menu-open" : ""}`} onClick={toggleMenu}></button>
         </section>
