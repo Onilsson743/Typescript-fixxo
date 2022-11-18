@@ -6,9 +6,9 @@ import Navbar from '../components/fullComponents/Navbar'
 const Contact = () => {
     
     interface Inputs {
-        name: string
-        email: string
-        comments: string
+        name?: string
+        email?: string
+        comments?: string
     }
     interface IContactForm {
         values: Inputs
@@ -18,11 +18,6 @@ const Contact = () => {
         name?: string
         email?: string
         comment?: string
-    }
-    const obj = {
-        test: "",
-        test1: "",
-        num: 0
     }
 
     const [contactForm, setContactForm] = useState({name: '', email: '', comments:''});
@@ -86,57 +81,58 @@ const Contact = () => {
 
     const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         e.preventDefault();
-        const error: IErrors = {name: '', email: '', comment: ''}
-        // const inputName = e.target.name;
-        // const inputValue = e.target.value;
+        const error = {name: '', email: '', comment: ''}
+        const event = e.target as HTMLInputElement
+        const inputName = event.name;
+        const inputValue = event.value;
        
         // Name field validation
-        // if (inputName === "name") {
-        //     const pattern = /^[A-Z][A-Za-z ]{1,30}$/
-        //     if (inputValue.match(pattern) ) {
-        //         delete error.name;
-        //         e.target.classList.remove("invalid")
-        //         setFormErrors(error);
-        //         console.log(formErrors);
-        //     } else {
-        //         e.target.classList.add("invalid")
-        //         error.name = "Your name must only contain letters, contain atleast 2 letters and start with a capital letter"
-        //         setFormErrors(error);
-        //         console.log(formErrors);
-        //     }
-        // }
+        if (inputName === "name") {
+            const pattern = /^[A-Z][A-Za-z ]{1,30}$/
+            if (inputValue.match(pattern) ) {
+                error.name = ""
+                event.classList.remove("invalid")
+                setFormErrors(error);
+                console.log(formErrors);
+            } else {
+                event.classList.add("invalid")
+                error.name = "Your name must only contain letters, contain atleast 2 letters and start with a capital letter"
+                setFormErrors(error);
+                console.log(formErrors);
+            }
+        }
 
         // Email field validation
-        // else if (inputName === "email") {
-        //     const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        else if (inputName === "email") {
+            const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             
-        //     if (inputValue.match(pattern)) {
-        //         delete error.email;
-        //         e.target.classList.remove("invalid")
-        //         setFormErrors(error)   
-        //     }
-        //     else {
-        //         console.log("your mail must be similar to 'name@domain.com'")
-        //         e.target.classList.add("invalid")
-        //         error.email = "Your mail must be this"
-        //         setFormErrors(error)
-        //     }
-        // }
+            if (inputValue.match(pattern)) {
+                error.name = ""
+                event.classList.remove("invalid")
+                setFormErrors(error)   
+            }
+            else {
+                console.log("your mail must be similar to 'name@domain.com'")
+                event.classList.add("invalid")
+                error.email = "Your mail must be this"
+                setFormErrors(error)
+            }
+        }
 
         // Comment validation
-        // else if (inputName === "comments") {
-            // console.log("this is comment")
-            // if (inputValue.length < 2) {
-            //     e.target.classList.add("invalid")
-            //     error.comment = "Your comment must contain atleast 2 characters"
-            //     setFormErrors(error)
-            // }
-            // else {
-            //     e.target.classList.remove("invalid")
-            //     delete error.comment;
-            //     setFormErrors(error)
-            // }
-        // } 
+        else if (inputName === "comments") {
+            console.log("this is comment")
+            if (inputValue.length < 2) {
+                event.classList.add("invalid")
+                error.comment = "Your comment must contain atleast 2 characters"
+                setFormErrors(error)
+            }
+            else {
+                event.classList.remove("invalid")
+                error.name = ""
+                setFormErrors(error)
+            }
+        } 
     }
 
 
