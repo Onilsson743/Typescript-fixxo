@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState } from 'react';
 import Footer from '../components/fullComponents/Footer'
 import Navbar from '../components/fullComponents/Navbar'
@@ -16,11 +17,16 @@ const Contact = () => {
         id?: number
         name?: string
         email?: string
-        comments?: string
+        comment?: string
+    }
+    const obj = {
+        test: "",
+        test1: "",
+        num: 0
     }
 
     const [contactForm, setContactForm] = useState({name: '', email: '', comments:''});
-    const [formErrors, setFormErrors] = useState({});
+    const [formErrors, setFormErrors] = useState({name: '', email: '', comment: ''});
     const [canSubmit, setCanSubmit] = useState(false);
 
     const validate: Function = ({values}: IContactForm) => {
@@ -36,9 +42,9 @@ const Contact = () => {
             errors.email = "You must enter a valid email (eg name@domain.com)"
         }
         if(!values.comments) {
-            errors.comments = "You must enter a comment";
+            errors.comment = "You must enter a comment";
         }else if (values.comments.length < 2) {
-            errors.comments = "your comment must be longer then five characters"
+            errors.comment = "your comment must be longer then five characters"
         }
 
         if (Object.keys(errors).length === 0) {
@@ -49,12 +55,12 @@ const Contact = () => {
         return errors;
     }
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void  => {
         const {id, value} = e.target;
         setContactForm({...contactForm, [id]: value})        
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>)  => {
         e.preventDefault()
 
         setFormErrors(validate(contactForm))        
@@ -78,59 +84,59 @@ const Contact = () => {
         
     }   
 
-    const handleKeyUp = (e) => {
+    const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         e.preventDefault();
-        const error: IErrors = {}
-        const inputName = e.target.name;
-        const inputValue = e.target.value;
+        const error: IErrors = {name: '', email: '', comment: ''}
+        // const inputName = e.target.name;
+        // const inputValue = e.target.value;
        
         // Name field validation
-        if (inputName === "name") {
-            const pattern = /^[A-Z][A-Za-z ]{1,30}$/
-            if (inputValue.match(pattern) ) {
-                delete error.name;
-                e.target.classList.remove("invalid")
-                setFormErrors(error);
-                console.log(formErrors);
-            } else {
-                e.target.classList.add("invalid")
-                error.name = "Your name must only contain letters, contain atleast 2 letters and start with a capital letter"
-                setFormErrors(error);
-                console.log(formErrors);
-            }
-        }
+        // if (inputName === "name") {
+        //     const pattern = /^[A-Z][A-Za-z ]{1,30}$/
+        //     if (inputValue.match(pattern) ) {
+        //         delete error.name;
+        //         e.target.classList.remove("invalid")
+        //         setFormErrors(error);
+        //         console.log(formErrors);
+        //     } else {
+        //         e.target.classList.add("invalid")
+        //         error.name = "Your name must only contain letters, contain atleast 2 letters and start with a capital letter"
+        //         setFormErrors(error);
+        //         console.log(formErrors);
+        //     }
+        // }
 
         // Email field validation
-        else if (inputName === "email") {
-            const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        // else if (inputName === "email") {
+        //     const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             
-            if (inputValue.match(pattern)) {
-                delete error.email;
-                e.target.classList.remove("invalid")
-                setFormErrors(error)   
-            }
-            else {
-                console.log("your mail must be similar to 'name@domain.com'")
-                e.target.classList.add("invalid")
-                error.email = "Your mail must be this"
-                setFormErrors(error)
-            }
-        }
+        //     if (inputValue.match(pattern)) {
+        //         delete error.email;
+        //         e.target.classList.remove("invalid")
+        //         setFormErrors(error)   
+        //     }
+        //     else {
+        //         console.log("your mail must be similar to 'name@domain.com'")
+        //         e.target.classList.add("invalid")
+        //         error.email = "Your mail must be this"
+        //         setFormErrors(error)
+        //     }
+        // }
 
         // Comment validation
-        else if (inputName === "comments") {
-            console.log("this is comment")
-            if (inputValue.length < 2) {
-                e.target.classList.add("invalid")
-                error.comments = "Your comment must contain atleast 2 characters"
-                setFormErrors(error)
-            }
-            else {
-                e.target.classList.remove("invalid")
-                delete error.comment;
-                setFormErrors(error)
-            }
-        } 
+        // else if (inputName === "comments") {
+            // console.log("this is comment")
+            // if (inputValue.length < 2) {
+            //     e.target.classList.add("invalid")
+            //     error.comment = "Your comment must contain atleast 2 characters"
+            //     setFormErrors(error)
+            // }
+            // else {
+            //     e.target.classList.remove("invalid")
+            //     delete error.comment;
+            //     setFormErrors(error)
+            // }
+        // } 
     }
 
 

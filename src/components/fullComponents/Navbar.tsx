@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
           <NavLink className='navbar-link' to='/' end>Home</NavLink>
           <NavLink className='navbar-link' to='/Categories' end>Categories</NavLink>
           <NavLink className='navbar-link' to='/Products' end>Products</NavLink>
-          <NavLink className='navbar-link' to='/contacts' end>Contacts</NavLink>
+          <NavLink className='navbar-link' to='/contact' end>Contacts</NavLink>
         </section>
 
         <section className='navbar-icons'>
